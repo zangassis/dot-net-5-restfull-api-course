@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Logging;
 using RestApiPerson.Model;
 using RestApiPerson.Services;
-using System;
 
 namespace RestApiPerson.Controllers
 {
@@ -12,7 +11,6 @@ namespace RestApiPerson.Controllers
     {
 
         private readonly ILogger<PersonController> _logger;
-
         private IPersonService _personService;
 
         public PersonController(ILogger<PersonController> logger, IPersonService personService)
@@ -41,7 +39,6 @@ namespace RestApiPerson.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Person person)
         {
-
             if (person == null)
                 return BadRequest();
 

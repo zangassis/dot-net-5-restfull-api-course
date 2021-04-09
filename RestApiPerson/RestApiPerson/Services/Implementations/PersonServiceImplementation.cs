@@ -1,5 +1,4 @@
 ﻿using RestApiPerson.Model;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -7,9 +6,9 @@ namespace RestApiPerson.Services.Implementations
 {
     public class PersonServiceImplementation : IPersonService
     {
-        private List<Person> persons;
-        private Person person;
-        private volatile int count;
+        private List<Person> _persons;
+        private Person _person;
+        private volatile int _count;
 
         public Person Create(Person person)
         {
@@ -22,20 +21,16 @@ namespace RestApiPerson.Services.Implementations
 
         public List<Person> GetAll()
         {
-
-            if(persons == null)
-            {
-                persons = new List<Person>();
-            }
+            _persons = new List<Person>();
 
             for (int i = 0; i < 8; i++)
             {
-                person = MockPerson(i);
+                _person = MockPerson(i);
 
-                persons.Add(person);
+                _persons.Add(_person);
             }
 
-            return persons;
+            return _persons;
         }
 
         public Person GetById(long Id)
@@ -64,19 +59,19 @@ namespace RestApiPerson.Services.Implementations
             {
                 Id = IncrementAndGet()
                             ,
-                FirstName = "Person Name" + i
+                FirstName = "Person Name " + i
                             ,
-                LastName = "Person Last Name" + i
+                LastName = "Person Last Name " + i
                             ,
-                Address = "Person Address" + i
+                Address = "Person Address " + i
                             ,
-                Gender = "Person Gender"
+                Gender = "Person Gender "
             };
         }
 
         private long IncrementAndGet()
         {
-            return Interlocked.Increment(ref count);
+            return Interlocked.Increment(ref _count);
         }
     }
 }
