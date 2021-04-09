@@ -1,5 +1,7 @@
 ﻿using RestApiPerson.Model;
+using RestApiPerson.Model.Context;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace RestApiPerson.Services.Implementations
@@ -9,6 +11,12 @@ namespace RestApiPerson.Services.Implementations
         private List<Person> _persons;
         private Person _person;
         private volatile int _count;
+        private MySqlContext _mySqlContext;
+
+        public PersonServiceImplementation(MySqlContext mySqlContext)
+        {
+            _mySqlContext = mySqlContext;
+        }
 
         public Person Create(Person person)
         {
@@ -19,19 +27,7 @@ namespace RestApiPerson.Services.Implementations
         {
         }
 
-        public List<Person> GetAll()
-        {
-            _persons = new List<Person>();
-
-            for (int i = 0; i < 8; i++)
-            {
-                _person = MockPerson(i);
-
-                _persons.Add(_person);
-            }
-
-            return _persons;
-        }
+        public List<Person> GetAll() => _mySqlContext.Persons.ToList();
 
         public Person GetById(long Id)
         {

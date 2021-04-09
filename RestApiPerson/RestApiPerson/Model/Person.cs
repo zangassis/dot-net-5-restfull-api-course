@@ -1,6 +1,9 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace RestApiPerson.Model
 {
+    [Table("person")]
     public class Person
     {
         public long Id { get; set; }
