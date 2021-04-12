@@ -1,16 +1,9 @@
-    using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using RestApiPerson.Model.Context;
 using RestApiPerson.Services;
@@ -36,6 +29,8 @@ namespace RestApiPerson
             var connection = Configuration["MySqlConnection:MySqlConnectionString"];
 
             services.AddDbContext<MySqlContext>(options => options.UseMySql(connection));
+
+            services.AddApiVersioning();
 
             services.AddScoped<IPersonService, PersonServiceImplementation>();
 
